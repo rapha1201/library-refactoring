@@ -23,8 +23,15 @@ class Book:
 
     def __init__(self, title: str, price_code: int):
         self.title = title
-        self.price_code = price_code
+        self.price_code = self.create_price(price_code)
 
+    def create_price(self, price_code: int):
+        if price_code == Book.NEW_RELEASE:
+            return NewReleasePrice()
+        elif price_code == Book.CHILDREN:
+            return ChildrenPrice()
+        return RegulaPrice()
+    
     def get_charge(self, days_rented: int) -> float:
         amount = 0
     
